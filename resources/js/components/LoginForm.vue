@@ -40,7 +40,9 @@
                 try {
                     const response = await axios.post('/api/login', this.form);
 
+
                     if (response.data.status === 'Success') {
+                        localStorage.setItem('user', JSON.stringify(response.data));
                         window.location.href = '/home';
                     } else if (response.data.status === 'Fail' && response.data.errors) {
                         this.errorMessage = Object.values(response.data.errors)

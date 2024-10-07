@@ -58,11 +58,11 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                        <h5 class="modal-title" id="deleteModalLabel">Confirm User</h5>
                         <button type="button" class="btn-close" @click="closeDeleteModal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Are you sure you want to delete this item?
+                        Are you sure you want to delete this user?
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" @click="closeDeleteModal">Cancel</button>

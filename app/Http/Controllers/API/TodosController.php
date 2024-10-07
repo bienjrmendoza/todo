@@ -5,14 +5,21 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Validator;
+use Auth;
+
+use App\Models\Todo;
+
 class TodosController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $todos = Todo::getAll($request);
+
+        return response()->json($todos);
     }
 
     /**
@@ -28,7 +35,29 @@ class TodosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'todo' => 'required',
+            'description' => 'required'
+        ];
+        
+        $input = $request->input();
+
+        $validator = Validator::make($input, $rules);
+
+        if ($validator->fails()) {
+            $data = [
+                'status' => 'Fail',
+                'errors' => $validator->errors()->toArray()
+            ];
+
+            return response()->json($data);
+        }
+
+        $todo = new Todo($input);
+        $todo->status = 'Pending';
+        $todo->save();
+
+        return response()->json(['status' => 'Success']);
     }
 
     /**
@@ -36,7 +65,11 @@ class TodosController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $todo = Todo::getOne($id);
+
+        if ($todo) {
+            return response()->json($todo);
+        }
     }
 
     /**
@@ -52,7 +85,13 @@ class TodosController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $todo = Todo::getOne($id);
+        
+        if ($todo) {
+            $todo->update($request->input());
+
+            return response()->json(['status' => 'Success']);
+        }
     }
 
     /**
@@ -60,6 +99,12 @@ class TodosController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $todo = Todo::getOne($id);
+
+        if ($todo) {
+            $todo->delete();
+            
+            return response()->json(['status' => 'Success']);
+        }
     }
 }

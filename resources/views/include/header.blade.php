@@ -10,7 +10,7 @@
                     <a class="nav-link mx-3" href="/home">USERS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mx-3" href=".todo">TODO</a>
+                    <a class="nav-link mx-3" href="todo">TODO</a>
                 </li>
             </ul>
         </div>

@@ -13,15 +13,14 @@ class Todo extends Model
     protected $table = 'todos';
 
     protected $fillable = [
-        'firstname',
-        'lastname',
-        'email',
-        'password'
+        'todo',
+        'description',
+        'status'
     ];
 
-    public static function getAll()
+    public static function getAll($request)
     {
-        $query = self;
+        $query = new self;
 
         if (!empty($input)) {
             $fields = (new self)->getFillable();

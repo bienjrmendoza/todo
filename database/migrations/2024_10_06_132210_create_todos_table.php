@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('todos', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->index();
+            $table->integer('user_id')->index()->nullable();
 
             $table->string('todo');
             $table->string('description');

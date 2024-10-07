@@ -73,6 +73,14 @@ class AuthController extends Controller
 
         if ($user) {
             if (Hash::check($input['password'], $user->password)) {
+                $token = $user->createToken('YourAppName')->plainTextToken;
+
+                $data = [
+                    'status' => 'Success',
+                    'token' => $token,
+                    'user' => $user
+                ];
+
                 return response()->json(['status' => 'Success']);
             } else {
                 $data = [
@@ -83,7 +91,5 @@ class AuthController extends Controller
                 return response()->json($data);
             }
         }
-    }
-
-    
+    }    
 }
