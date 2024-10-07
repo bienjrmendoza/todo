@@ -48,7 +48,7 @@ class User extends Authenticatable
 
     public static function getAll($request)
     {
-        $query = self;
+        $query = new self;
 
         if (!empty($request->input())) {
             $fields = (new self)->getFillable();
@@ -85,5 +85,10 @@ class User extends Authenticatable
         }
 
         return $array;
+    }
+
+    public function user_detail()
+    {
+        return $this->hasOne('App\Models\UserDetail');
     }
 }

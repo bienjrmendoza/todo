@@ -5,5 +5,7 @@
 @endsection
 
 @section('content')
-    
+    <div id="app">
+        <user-table></user-table>
+    </div>
 @endsection

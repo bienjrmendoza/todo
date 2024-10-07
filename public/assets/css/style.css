@@ -32,6 +32,48 @@ a {
     align-items: center !important;
 }
 
+
+.navbar {
+    background-color: #e3e6e8;
+}
+
+.navbar .navbar-brand {
+    font-size: 30px;
+    font-weight: 600;
+    margin-left: 30px !important;
+}
+
+.navbar-nav {
+    margin-right: 30px;
+}
+
+.navbar-nav ul {
+    line-height: 1.5;
+}
+
+.navbar-toggler {
+    border: none;
+    background-color: #ffc107;
+}
+
+.navbar-toggler-icon {
+    color: #ffffff;
+    font-size: 1.5rem;
+}
+
+.nav-item:hover {
+    background-color: #ffd24d;
+    color: #343a40 !important;
+    border-radius: 5px;
+    height: 100%;
+    font-weight: 500;
+}
+
+.show {
+    display: block !important;
+    opacity: 1 !important;
+  }
+
 @media (max-width: 576px) {
     .login-container {
         width: 90%;

@@ -15,7 +15,11 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
-        $users = User::getAll($request->input());
+        $order = $request->input('order', 'id');
+        $sort = $request->input('sort', 'asc');
+        $page = $request->input('page', 1);
+
+        $users = User::with('user_detail')->paginate(10, ['*'], 'page', $page);
 
         return response()->json($users);
     }
@@ -87,6 +91,10 @@ class UsersController extends Controller
         if ($user) {
             $user->update($request->input());
 
+            if ($user->user_detail) {
+                $user->user_detail->update($request->input(['user_detail']));
+            }
+
             return response()->json(['status' => 'Success']);
         }
     }
@@ -99,9 +107,9 @@ class UsersController extends Controller
         $user = User::getOne($id);
 
         if ($user) {
-            $user->update(['deprecated' => 1]);
+            $user->delete();
             
-            return response()->json($user);
+            return response()->json(['status' => 'Success']);
         }
     }
 }
