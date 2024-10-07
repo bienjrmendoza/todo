@@ -1,0 +1,55 @@
+a {
+    color: #6666ff;
+    text-decoration: none;
+}
+
+.credential-container {
+    background-color: #f8f9fa;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-container {
+    width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.register-container {
+    width: 600px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar {
+    justify-content: flex-start !important;
+    align-items: center !important;
+}
+
+@media (max-width: 576px) {
+    .login-container {
+        width: 90%;
+        margin: 10px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 767px) {
+    .register-container {
+        max-width: 90%;
+        margin-top: 280px !important;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 570px) {
+    .register-container {
+        max-width: 75%;
+    }
+}
