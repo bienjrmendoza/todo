@@ -1,17 +1,7 @@
 <template>
     <div>
-        <div class="container">
-            <form @submit.prevent="addTodo" class="mb-4">
-                <div class="form-group mb-3">
-                    <label for="todoTitle" class="mb-1">Title</label>
-                    <input type="text" id="todoTitle" v-model="newTodo.todo" class="form-control" placeholder="Enter Todo Title" required/>
-                </div>
-                <div class="form-group mb-3">
-                    <label for="todoDescription" class="mb-1">Description</label>
-                    <textarea id="todoDescription" v-model="newTodo.description" class="form-control" placeholder="Enter Todo Description" rows="3"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary mt-2">Add Todo</button>
-            </form>
+        <div class="button-container d-flex justify-content-end my-3">
+            <button type="button" class="btn btn-primary" @click="isAddModalOpen = true">Add Todo</button>
         </div>
         <div v-if="message" class="alert alert-info">
             {{ message }}
@@ -82,6 +72,32 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" :class="{ show: isAddModalOpen }" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true" style="display: isAddModalOpen ? 'block' : 'none';">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Todo</h5>
+                        <button type="button" class="close" @click="isAddModalOpen = false">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form @submit.prevent="addTodo">
+                            <div class="form-group">
+                                <label for="todo-title">Todo Title</label>
+                                <input v-model="newTodo.todo" type="text" class="form-control" id="todo-title" placeholder="Enter Todo Title" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="todo-description">Description</label>
+                                <textarea v-model="newTodo.description" class="form-control" id="todo-description" placeholder="Enter Description" rows="3"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary mt-2">Add Todo</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -104,6 +120,7 @@
                     status: ''
                 },
                 editingTodo: {},
+                isAddModalOpen: false,
                 isEditModalOpen: false,
                 isDeleteModalOpen: false,
                 todoId: null
@@ -125,8 +142,12 @@
             addTodo() {
                 axios.post('/api/todo', this.newTodo)
                     .then(response => {
+                        console.log(response);
                         this.todos.push(response.data);
+                        this.fetchTodos();
+                        this.isAddModalOpen = false;
                         this.newTodo = { title: '', description: '' };
+                        this.message = 'Todo added successfully!';
                     })
                     .catch(error => {
                         console.error("Error adding todo:", error);

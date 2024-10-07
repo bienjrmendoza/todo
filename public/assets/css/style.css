@@ -72,7 +72,12 @@ a {
 .show {
     display: block !important;
     opacity: 1 !important;
-  }
+}
+
+.button-container {
+    margin-right: 50px;
+    height: 45px;
+}
 
 @media (max-width: 576px) {
     .login-container {
